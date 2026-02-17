@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -39,6 +39,7 @@ const categoryOptions = [
 const EditRecord = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,18 +51,17 @@ const EditRecord = () => {
   const [newFile, setNewFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
 
-  useEffect(() => {
-    fetchRecord();
-  }, [id]);
-
-  const fetchRecord = async () => {
+  // ✅ FIXED: Wrapped in useCallback for ESLint
+  const fetchRecord = useCallback(async () => {
     try {
       const record = await vaultApi.getRecord(id);
+
       setFormData({
         category: record.category,
         title: record.title,
         description: record.description || ''
       });
+
       if (record.file_name) {
         setExistingFile({
           name: record.file_name,
@@ -74,7 +74,12 @@ const EditRecord = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, navigate]);
+
+  // ✅ FIXED: dependency updated
+  useEffect(() => {
+    fetchRecord();
+  }, [fetchRecord]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -144,11 +149,13 @@ const EditRecord = () => {
       data.append('category', formData.category);
       data.append('title', formData.title);
       data.append('description', formData.description || '');
+
       if (newFile) {
         data.append('file', newFile);
       }
 
       await vaultApi.updateRecord(id, data);
+
       toast.success('Record updated successfully!');
       navigate('/dashboard/vault');
     } catch (error) {
@@ -182,7 +189,10 @@ const EditRecord = () => {
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Vault
         </Button>
-        <h1 className="font-heading text-3xl font-bold text-white mb-2">Edit Record</h1>
+
+        <h1 className="font-heading text-3xl font-bold text-white mb-2">
+          Edit Record
+        </h1>
         <p className="text-slate-400">Update your document details</p>
       </motion.div>
 
