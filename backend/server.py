@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field, EmailStr, ConfigDict
 from typing import List, Optional
 import uuid
 from datetime import datetime, timezone, timedelta
-import jwt
+from jose import jwt
 import bcrypt
 import cloudinary
 import cloudinary.uploader
