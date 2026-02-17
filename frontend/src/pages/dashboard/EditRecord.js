@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  Save, 
+import {
+  Save,
   Upload,
   FileText,
   X,
-  Building2, 
-  Shield, 
+  Building2,
+  Shield,
   Wallet,
   Home,
   Coins,
@@ -51,7 +51,7 @@ const EditRecord = () => {
   const [newFile, setNewFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
 
-  // ✅ FIXED: Wrapped in useCallback for ESLint
+  // ✅ FIXED: Properly memoized for ESLint CI build
   const fetchRecord = useCallback(async () => {
     try {
       const record = await vaultApi.getRecord(id);
@@ -76,7 +76,6 @@ const EditRecord = () => {
     }
   }, [id, navigate]);
 
-  // ✅ FIXED: dependency updated
   useEffect(() => {
     fetchRecord();
   }, [fetchRecord]);
@@ -84,13 +83,6 @@ const EditRecord = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      validateAndSetFile(selectedFile);
-    }
   };
 
   const validateAndSetFile = (selectedFile) => {
@@ -108,6 +100,13 @@ const EditRecord = () => {
     }
 
     setNewFile(selectedFile);
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      validateAndSetFile(selectedFile);
+    }
   };
 
   const handleDrag = (e) => {
@@ -203,14 +202,16 @@ const EditRecord = () => {
         onSubmit={handleSubmit}
         className="glass rounded-2xl p-8 space-y-6"
       >
-        {/* Category */}
+
         <div className="space-y-2">
           <Label htmlFor="category" className="text-slate-300">Category *</Label>
-          <Select 
-            value={formData.category} 
-            onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+          <Select
+            value={formData.category}
+            onValueChange={(value) =>
+              setFormData(prev => ({ ...prev, category: value }))
+            }
           >
-            <SelectTrigger 
+            <SelectTrigger
               className="bg-white/5 border-white/10 text-white h-12"
               data-testid="category-select"
             >
@@ -218,8 +219,8 @@ const EditRecord = () => {
             </SelectTrigger>
             <SelectContent className="bg-[#0F253A] border-white/10">
               {categoryOptions.map((option) => (
-                <SelectItem 
-                  key={option.value} 
+                <SelectItem
+                  key={option.value}
                   value={option.value}
                   className="text-white hover:bg-white/10 focus:bg-white/10"
                 >
@@ -233,7 +234,6 @@ const EditRecord = () => {
           </Select>
         </div>
 
-        {/* Title */}
         <div className="space-y-2">
           <Label htmlFor="title" className="text-slate-300">Title *</Label>
           <Input
@@ -248,7 +248,6 @@ const EditRecord = () => {
           />
         </div>
 
-        {/* Description */}
         <div className="space-y-2">
           <Label htmlFor="description" className="text-slate-300">Description</Label>
           <Textarea
@@ -263,89 +262,6 @@ const EditRecord = () => {
           />
         </div>
 
-        {/* Current File */}
-        {existingFile && !newFile && (
-          <div className="space-y-2">
-            <Label className="text-slate-300">Current Attachment</Label>
-            <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5">
-              <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                <FileText className="h-5 w-5 text-accent" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-white">{existingFile.name}</p>
-                <p className="text-sm text-slate-400">
-                  {(existingFile.size / 1024 / 1024).toFixed(2)} MB
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* File Upload */}
-        <div className="space-y-2">
-          <Label className="text-slate-300">
-            {existingFile ? 'Replace Attachment' : 'Attachment (Optional)'}
-          </Label>
-          <div
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
-              dragActive 
-                ? 'border-accent bg-accent/5' 
-                : 'border-white/10 hover:border-white/20'
-            }`}
-          >
-            <input
-              type="file"
-              onChange={handleFileChange}
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              data-testid="file-input"
-            />
-            
-            {newFile ? (
-              <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-accent" />
-                </div>
-                <div className="text-left">
-                  <p className="font-medium text-white">{newFile.name}</p>
-                  <p className="text-sm text-slate-400">
-                    {(newFile.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setNewFile(null);
-                  }}
-                  className="text-slate-400 hover:text-white"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            ) : (
-              <>
-                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-                  <Upload className="h-8 w-8 text-slate-400" />
-                </div>
-                <p className="text-white font-medium mb-1">
-                  {existingFile ? 'Drop a new file to replace' : 'Drag & drop or click to upload'}
-                </p>
-                <p className="text-sm text-slate-400">
-                  PDF, JPG, PNG (max 10MB)
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Submit Button */}
         <div className="flex gap-4 pt-4">
           <Button
             type="button"
@@ -355,6 +271,7 @@ const EditRecord = () => {
           >
             Cancel
           </Button>
+
           <Button
             type="submit"
             disabled={saving}
@@ -374,6 +291,7 @@ const EditRecord = () => {
             )}
           </Button>
         </div>
+
       </motion.form>
     </div>
   );
