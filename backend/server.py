@@ -54,7 +54,7 @@ else:
     logging.warning("Cloudinary not configured - file uploads will be disabled")
 
 # CORS Configuration
-FRONTEND_URL = os.environ.get('FRONTEND_URL', '*')
+FRONTEND_URL = os.environ.get('FRONTEND_URL')
 
 # File upload configuration
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
@@ -732,13 +732,13 @@ app.include_router(api_router)
 # ==================== CORS MIDDLEWARE ====================
 
 # Configure CORS - restrict to frontend URL in production
-allowed_origins = ["*"] if FRONTEND_URL == "*" else [FRONTEND_URL]
+allowed_origins = [FRONTEND_URL] if FRONTEND_URL else []
 
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_origins=allowed_origins,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
