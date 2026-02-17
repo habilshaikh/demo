@@ -53,34 +53,58 @@ module.exports = {
                     '4': 'hsl(var(--chart-4))',
                     '5': 'hsl(var(--chart-5))'
                 },
-                navy: {
-                    DEFAULT: '#0B1C2D',
-                    50: '#F0F9FF',
-                    100: '#E0F2FE',
-                    200: '#BAE6FD',
-                    300: '#7DD3FC',
-                    400: '#38BDF8',
-                    500: '#0EA5E9',
-                    600: '#0284C7',
-                    700: '#0369A1',
-                    800: '#075985',
-                    900: '#0C4A6E',
-                    950: '#0B1C2D'
-                },
-                royal: {
-                    DEFAULT: '#1E3A8A',
-                    light: '#3B82F6',
-                    dark: '#1E3A5F'
+                // Premium Navy Blue + Royal Gold Theme (Mascot-Matched)
+                vault: {
+                    navy: '#22304F',
+                    'navy-deep': '#1A2540',
+                    'navy-light': '#2D3D5F',
+                    'navy-soft': '#384A6E',
                 },
                 gold: {
-                    DEFAULT: '#FFD700',
-                    light: '#FDB931'
+                    DEFAULT: '#D4AF37',
+                    light: '#E3B82A',
+                    dark: '#B8941F',
+                    muted: '#C9A227',
+                    royal: '#D4AF37',
+                    glow: 'rgba(212, 175, 55, 0.3)',
+                },
+                silver: {
+                    DEFAULT: '#C8D0DC',
+                    light: '#F2F2F2',
+                    soft: '#E8EDF4',
+                    platinum: '#FFFFFF',
+                },
+                cream: {
+                    DEFAULT: '#F8F6F0',
+                    soft: '#FFFEF9',
                 }
             },
             borderRadius: {
                 lg: 'var(--radius)',
                 md: 'calc(var(--radius) - 2px)',
-                sm: 'calc(var(--radius) - 4px)'
+                sm: 'calc(var(--radius) - 4px)',
+                'xl': '1rem',
+                '2xl': '1.25rem',
+                '3xl': '1.5rem',
+            },
+            boxShadow: {
+                'gold': '0 0 30px rgba(212, 175, 55, 0.25)',
+                'gold-lg': '0 0 50px rgba(212, 175, 55, 0.35)',
+                'gold-glow': '0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.2)',
+                'navy': '0 0 30px rgba(34, 48, 79, 0.3)',
+                'navy-lg': '0 0 50px rgba(34, 48, 79, 0.4)',
+                'inner-gold': 'inset 0 1px 0 rgba(212, 175, 55, 0.2)',
+                'luxury': '0 25px 50px -12px rgba(26, 37, 64, 0.6)',
+                'card-luxury': '0 4px 30px rgba(26, 37, 64, 0.4), 0 0 1px rgba(212, 175, 55, 0.15)',
+            },
+            backgroundImage: {
+                'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #E3B82A 50%, #B8941F 100%)',
+                'gold-gradient-hover': 'linear-gradient(135deg, #E3B82A 0%, #D4AF37 50%, #D4AF37 100%)',
+                'navy-gradient': 'linear-gradient(180deg, #22304F 0%, #1A2540 50%, #22304F 100%)',
+                'navy-light-gradient': 'linear-gradient(135deg, #2D3D5F 0%, #22304F 50%, #1A2540 100%)',
+                'silver-gradient': 'linear-gradient(135deg, #F2F2F2 0%, #C8D0DC 50%, #E8EDF4 100%)',
+                'card-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)',
+                'gold-shine': 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 50%, transparent 100%)',
             },
             keyframes: {
                 'accordion-down': {
@@ -99,9 +123,17 @@ module.exports = {
                     from: { opacity: '0', transform: 'translateY(20px)' },
                     to: { opacity: '1', transform: 'translateY(0)' }
                 },
-                'slide-in-right': {
-                    from: { opacity: '0', transform: 'translateX(20px)' },
-                    to: { opacity: '1', transform: 'translateX(0)' }
+                'shine': {
+                    from: { backgroundPosition: '-200% center' },
+                    to: { backgroundPosition: '200% center' }
+                },
+                'gold-pulse': {
+                    '0%, 100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)' },
+                    '50%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.5)' }
+                },
+                'float': {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' }
                 }
             },
             animation: {
@@ -109,7 +141,9 @@ module.exports = {
                 'accordion-up': 'accordion-up 0.2s ease-out',
                 'fade-in': 'fade-in 0.5s ease-out',
                 'fade-in-up': 'fade-in-up 0.5s ease-out',
-                'slide-in-right': 'slide-in-right 0.5s ease-out'
+                'shine': 'shine 2s ease-in-out infinite',
+                'gold-pulse': 'gold-pulse 2s ease-in-out infinite',
+                'float': 'float 6s ease-in-out infinite',
             },
             backdropBlur: {
                 xs: '2px',

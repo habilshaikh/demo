@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight, ArrowLeft, Lock, KeyRound } from 'lucide-react';
+import { Mail, ArrowRight, ArrowLeft, Lock, KeyRound, CheckCircle2 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
@@ -66,11 +66,14 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1C2D] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-vault-black flex items-center justify-center p-6 relative">
+      <div className="absolute inset-0 luxury-bg" />
+      <div className="absolute inset-0 marble-texture" />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md relative z-10"
       >
         {/* Logo */}
         <Link to="/" className="inline-block mb-8">
@@ -82,15 +85,15 @@ const ForgotPasswordPage = () => {
             <h1 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
               Forgot Password?
             </h1>
-            <p className="text-slate-400 mb-8">
+            <p className="text-silver/60 mb-8">
               Enter your email address and we'll send you a reset code
             </p>
 
             <form onSubmit={handleRequestCode} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-slate-300">Email Address</Label>
+                <Label htmlFor="email">Email Address</Label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                   <Input
                     id="email"
                     type="email"
@@ -99,7 +102,7 @@ const ForgotPasswordPage = () => {
                     required
                     placeholder="you@example.com"
                     data-testid="forgot-email-input"
-                    className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                    className="pl-12 h-12"
                   />
                 </div>
               </div>
@@ -108,11 +111,12 @@ const ForgotPasswordPage = () => {
                 type="submit"
                 disabled={loading}
                 data-testid="forgot-submit-btn"
-                className="w-full bg-accent hover:bg-accent/90 text-white rounded-xl h-12 font-medium btn-glow"
+                variant="luxury"
+                className="w-full h-12 rounded-xl"
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-vault-black/30 border-t-vault-black rounded-full animate-spin" />
                     Sending...
                   </span>
                 ) : (
@@ -131,15 +135,15 @@ const ForgotPasswordPage = () => {
             <h1 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
               Reset Password
             </h1>
-            <p className="text-slate-400 mb-8">
+            <p className="text-silver/60 mb-8">
               Enter the reset code and your new password
             </p>
 
             <form onSubmit={handleResetPassword} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="resetCode" className="text-slate-300">Reset Code</Label>
+                <Label htmlFor="resetCode">Reset Code</Label>
                 <div className="relative">
-                  <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                  <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                   <Input
                     id="resetCode"
                     type="text"
@@ -148,15 +152,15 @@ const ForgotPasswordPage = () => {
                     required
                     placeholder="XXXXXXXX"
                     data-testid="reset-code-input"
-                    className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12 uppercase"
+                    className="pl-12 h-12 uppercase tracking-widest"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="newPassword" className="text-slate-300">New Password</Label>
+                <Label htmlFor="newPassword">New Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                   <Input
                     id="newPassword"
                     type="password"
@@ -165,15 +169,15 @@ const ForgotPasswordPage = () => {
                     required
                     placeholder="••••••••"
                     data-testid="new-password-input"
-                    className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                    className="pl-12 h-12"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-slate-300">Confirm Password</Label>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                   <Input
                     id="confirmPassword"
                     type="password"
@@ -182,7 +186,7 @@ const ForgotPasswordPage = () => {
                     required
                     placeholder="••••••••"
                     data-testid="confirm-new-password-input"
-                    className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                    className="pl-12 h-12"
                   />
                 </div>
               </div>
@@ -191,11 +195,12 @@ const ForgotPasswordPage = () => {
                 type="submit"
                 disabled={loading}
                 data-testid="reset-password-btn"
-                className="w-full bg-accent hover:bg-accent/90 text-white rounded-xl h-12 font-medium btn-glow"
+                variant="luxury"
+                className="w-full h-12 rounded-xl"
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-vault-black/30 border-t-vault-black rounded-full animate-spin" />
                     Resetting...
                   </span>
                 ) : (
@@ -209,7 +214,7 @@ const ForgotPasswordPage = () => {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-white"
+                className="w-full flex items-center justify-center gap-2 text-silver/60 hover:text-gold transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back
@@ -220,19 +225,26 @@ const ForgotPasswordPage = () => {
 
         {step === 3 && (
           <div className="text-center">
-            <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-6">
-              <Lock className="h-10 w-10 text-green-500" />
-            </div>
+            <motion.div 
+              className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", duration: 0.5 }}
+            >
+              <CheckCircle2 className="h-10 w-10 text-emerald-500" />
+            </motion.div>
             <h1 className="font-heading text-3xl font-bold text-white mb-4">
               Password Reset!
             </h1>
-            <p className="text-slate-400 mb-8">
+            <p className="text-silver/60 mb-8">
               Your password has been reset successfully. You can now sign in with your new password.
             </p>
             <Link to="/login">
               <Button
                 data-testid="go-to-login-btn"
-                className="bg-accent hover:bg-accent/90 text-white rounded-xl px-8 py-6 font-medium btn-glow"
+                variant="luxury"
+                size="lg"
+                className="rounded-xl"
               >
                 Go to Sign In
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -242,9 +254,9 @@ const ForgotPasswordPage = () => {
         )}
 
         {step !== 3 && (
-          <p className="mt-8 text-center text-slate-400">
+          <p className="mt-8 text-center text-silver/50">
             Remember your password?{' '}
-            <Link to="/login" className="text-accent hover:text-accent/80 font-medium">
+            <Link to="/login" className="text-gold hover:text-gold-light font-medium transition-colors">
               Sign in
             </Link>
           </p>

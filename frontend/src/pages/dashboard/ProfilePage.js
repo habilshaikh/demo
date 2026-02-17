@@ -89,7 +89,7 @@ const ProfilePage = () => {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className="font-heading text-3xl font-bold text-white mb-2">Profile Settings</h1>
-        <p className="text-slate-400">Manage your account information</p>
+        <p className="text-silver/60">Manage your account information</p>
       </motion.div>
 
       {/* Profile Information */}
@@ -98,38 +98,38 @@ const ProfilePage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         onSubmit={handleProfileSubmit}
-        className="glass rounded-2xl p-8 space-y-6"
+        className="luxury-card rounded-2xl p-8 space-y-6"
       >
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center">
-            <User className="h-8 w-8 text-accent" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold/15 to-gold/5 flex items-center justify-center border border-gold/20 shadow-gold/20">
+            <User className="h-8 w-8 text-gold" />
           </div>
           <div>
             <h2 className="font-heading text-xl font-semibold text-white">Personal Information</h2>
-            <p className="text-slate-400">Update your profile details</p>
+            <p className="text-silver/50">Update your profile details</p>
           </div>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="full_name" className="text-slate-300">Full Name</Label>
+            <Label htmlFor="full_name">Full Name</Label>
             <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
               <Input
                 id="full_name"
                 name="full_name"
                 value={profileData.full_name}
                 onChange={handleProfileChange}
                 data-testid="profile-name-input"
-                className="pl-12 bg-white/5 border-white/10 text-white h-12"
+                className="pl-12 h-12"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-300">Email Address</Label>
+            <Label htmlFor="email">Email Address</Label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
               <Input
                 id="email"
                 name="email"
@@ -137,7 +137,7 @@ const ProfilePage = () => {
                 value={profileData.email}
                 onChange={handleProfileChange}
                 data-testid="profile-email-input"
-                className="pl-12 bg-white/5 border-white/10 text-white h-12"
+                className="pl-12 h-12"
               />
             </div>
           </div>
@@ -147,11 +147,12 @@ const ProfilePage = () => {
           type="submit"
           disabled={loading}
           data-testid="update-profile-btn"
-          className="bg-accent hover:bg-accent/90 text-white rounded-xl h-12"
+          variant="luxury"
+          className="rounded-xl h-12"
         >
           {loading ? (
             <span className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-vault-black/30 border-t-vault-black rounded-full animate-spin" />
               Saving...
             </span>
           ) : (
@@ -169,23 +170,23 @@ const ProfilePage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
         onSubmit={handlePasswordSubmit}
-        className="glass rounded-2xl p-8 space-y-6"
+        className="luxury-card rounded-2xl p-8 space-y-6"
       >
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center">
-            <Lock className="h-8 w-8 text-accent" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-silver/15 to-silver/5 flex items-center justify-center border border-silver/20">
+            <Lock className="h-8 w-8 text-silver" />
           </div>
           <div>
             <h2 className="font-heading text-xl font-semibold text-white">Change Password</h2>
-            <p className="text-slate-400">Update your account password</p>
+            <p className="text-silver/50">Update your account password</p>
           </div>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="current_password" className="text-slate-300">Current Password</Label>
+            <Label htmlFor="current_password">Current Password</Label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
               <Input
                 id="current_password"
                 name="current_password"
@@ -193,12 +194,12 @@ const ProfilePage = () => {
                 value={passwordData.current_password}
                 onChange={handlePasswordChange}
                 data-testid="current-password-input"
-                className="pl-12 pr-12 bg-white/5 border-white/10 text-white h-12"
+                className="pl-12 pr-12 h-12"
               />
               <button
                 type="button"
                 onClick={() => setShowPasswords(!showPasswords)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-silver/50 hover:text-gold transition-colors"
               >
                 {showPasswords ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
@@ -206,9 +207,9 @@ const ProfilePage = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="new_password" className="text-slate-300">New Password</Label>
+            <Label htmlFor="new_password">New Password</Label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
               <Input
                 id="new_password"
                 name="new_password"
@@ -216,15 +217,15 @@ const ProfilePage = () => {
                 value={passwordData.new_password}
                 onChange={handlePasswordChange}
                 data-testid="new-password-input"
-                className="pl-12 bg-white/5 border-white/10 text-white h-12"
+                className="pl-12 h-12"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirm_password" className="text-slate-300">Confirm New Password</Label>
+            <Label htmlFor="confirm_password">Confirm New Password</Label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
               <Input
                 id="confirm_password"
                 name="confirm_password"
@@ -232,7 +233,7 @@ const ProfilePage = () => {
                 value={passwordData.confirm_password}
                 onChange={handlePasswordChange}
                 data-testid="confirm-password-input"
-                className="pl-12 bg-white/5 border-white/10 text-white h-12"
+                className="pl-12 h-12"
               />
             </div>
           </div>
@@ -242,11 +243,12 @@ const ProfilePage = () => {
           type="submit"
           disabled={passwordLoading}
           data-testid="change-password-btn"
-          className="bg-accent hover:bg-accent/90 text-white rounded-xl h-12"
+          variant="secondary"
+          className="rounded-xl h-12"
         >
           {passwordLoading ? (
             <span className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-vault-black/30 border-t-vault-black rounded-full animate-spin" />
               Changing...
             </span>
           ) : (
@@ -263,21 +265,24 @@ const ProfilePage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="glass rounded-2xl p-6"
+        className="luxury-card rounded-2xl p-6"
       >
-        <h3 className="font-heading text-lg font-semibold text-white mb-4">Account Information</h3>
+        <h3 className="font-heading text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <span className="w-8 h-px bg-gradient-to-r from-gold to-transparent" />
+          Account Information
+        </h3>
         <div className="grid gap-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-slate-400">Account ID</span>
-            <span className="text-white font-mono">{user?.id?.slice(0, 8)}...</span>
+            <span className="text-silver/50">Account ID</span>
+            <span className="text-silver font-mono">{user?.id?.slice(0, 8)}...</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-slate-400">Role</span>
-            <span className="text-white capitalize">{user?.role}</span>
+            <span className="text-silver/50">Role</span>
+            <span className="text-gold capitalize">{user?.role}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-slate-400">Member Since</span>
-            <span className="text-white">
+            <span className="text-silver/50">Member Since</span>
+            <span className="text-silver">
               {user?.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
             </span>
           </div>

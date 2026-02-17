@@ -41,8 +41,11 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0B1C2D] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#22304F' }}>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-full border-2 border-[#D4AF37]/30 border-t-[#D4AF37] animate-spin" />
+          <p className="text-[#C8D0DC]/60 text-sm">Loading...</p>
+        </div>
       </div>
     );
   }
@@ -64,8 +67,11 @@ const PublicRoute = ({ children }) => {
   
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0B1C2D] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#22304F' }}>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-full border-2 border-[#D4AF37]/30 border-t-[#D4AF37] animate-spin" />
+          <p className="text-[#C8D0DC]/60 text-sm">Loading...</p>
+        </div>
       </div>
     );
   }
@@ -128,9 +134,11 @@ function App() {
           position="top-right"
           toastOptions={{
             style: {
-              background: '#0F253A',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: 'rgba(34, 48, 79, 0.95)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(212, 175, 55, 0.2)',
               color: '#F8FAFC',
+              boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.1)',
             },
           }}
         />

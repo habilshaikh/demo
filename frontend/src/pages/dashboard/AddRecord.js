@@ -137,7 +137,7 @@ const AddRecord = () => {
         className="mb-8"
       >
         <h1 className="font-heading text-3xl font-bold text-white mb-2">Add New Record</h1>
-        <p className="text-slate-400">Securely store a new document in your vault</p>
+        <p className="text-silver/60">Securely store a new document in your vault</p>
       </motion.div>
 
       <motion.form
@@ -145,30 +145,26 @@ const AddRecord = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         onSubmit={handleSubmit}
-        className="glass rounded-2xl p-8 space-y-6"
+        className="luxury-card rounded-2xl p-8 space-y-6"
       >
         {/* Category */}
         <div className="space-y-2">
-          <Label htmlFor="category" className="text-slate-300">Category *</Label>
+          <Label htmlFor="category">Category *</Label>
           <Select 
             value={formData.category} 
             onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
           >
             <SelectTrigger 
-              className="bg-white/5 border-white/10 text-white h-12"
+              className="h-12"
               data-testid="category-select"
             >
               <SelectValue placeholder="Select a category" />
             </SelectTrigger>
-            <SelectContent className="bg-[#0F253A] border-white/10">
+            <SelectContent>
               {categoryOptions.map((option) => (
-                <SelectItem 
-                  key={option.value} 
-                  value={option.value}
-                  className="text-white hover:bg-white/10 focus:bg-white/10"
-                >
+                <SelectItem key={option.value} value={option.value}>
                   <span className="flex items-center gap-2">
-                    <option.icon className="h-4 w-4" />
+                    <option.icon className="h-4 w-4 text-gold" />
                     {option.label}
                   </span>
                 </SelectItem>
@@ -179,7 +175,7 @@ const AddRecord = () => {
 
         {/* Title */}
         <div className="space-y-2">
-          <Label htmlFor="title" className="text-slate-300">Title *</Label>
+          <Label htmlFor="title">Title *</Label>
           <Input
             id="title"
             name="title"
@@ -188,13 +184,13 @@ const AddRecord = () => {
             required
             placeholder="e.g., HDFC Savings Account"
             data-testid="title-input"
-            className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 h-12"
+            className="h-12"
           />
         </div>
 
         {/* Description */}
         <div className="space-y-2">
-          <Label htmlFor="description" className="text-slate-300">Description</Label>
+          <Label htmlFor="description">Description</Label>
           <Textarea
             id="description"
             name="description"
@@ -203,22 +199,21 @@ const AddRecord = () => {
             placeholder="Add any additional details or notes..."
             data-testid="description-input"
             rows={4}
-            className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 resize-none"
           />
         </div>
 
         {/* File Upload */}
         <div className="space-y-2">
-          <Label className="text-slate-300">Attachment (Optional)</Label>
+          <Label>Attachment (Optional)</Label>
           <div
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
+            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 ${
               dragActive 
-                ? 'border-accent bg-accent/5' 
-                : 'border-white/10 hover:border-white/20'
+                ? 'border-gold bg-gold/5' 
+                : 'border-gold/20 hover:border-gold/40'
             }`}
           >
             <input
@@ -231,12 +226,12 @@ const AddRecord = () => {
             
             {file ? (
               <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-accent" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 flex items-center justify-center border border-gold/20">
+                  <FileText className="h-6 w-6 text-gold" />
                 </div>
                 <div className="text-left">
                   <p className="font-medium text-white">{file.name}</p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-sm text-silver/50">
                     {(file.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
@@ -248,20 +243,20 @@ const AddRecord = () => {
                     e.stopPropagation();
                     setFile(null);
                   }}
-                  className="text-slate-400 hover:text-white"
+                  className="text-silver/60 hover:text-red-400 hover:bg-red-500/10"
                 >
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             ) : (
               <>
-                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-                  <Upload className="h-8 w-8 text-slate-400" />
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold/10 to-gold/5 flex items-center justify-center mx-auto mb-4 border border-gold/20">
+                  <Upload className="h-8 w-8 text-gold/50" />
                 </div>
                 <p className="text-white font-medium mb-1">
                   Drag & drop or click to upload
                 </p>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-silver/50">
                   PDF, JPG, PNG (max 10MB)
                 </p>
               </>
@@ -275,7 +270,7 @@ const AddRecord = () => {
             type="button"
             variant="outline"
             onClick={() => navigate('/dashboard/vault')}
-            className="flex-1 border-white/10 text-white hover:bg-white/5 h-12"
+            className="flex-1 h-12"
           >
             Cancel
           </Button>
@@ -283,11 +278,12 @@ const AddRecord = () => {
             type="submit"
             disabled={loading}
             data-testid="submit-record-btn"
-            className="flex-1 bg-accent hover:bg-accent/90 text-white h-12 btn-glow"
+            variant="luxury"
+            className="flex-1 h-12"
           >
             {loading ? (
               <span className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-vault-black/30 border-t-vault-black rounded-full animate-spin" />
                 Saving...
               </span>
             ) : (

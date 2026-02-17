@@ -5,14 +5,15 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useAuth } from '../../context/AuthContext';
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_wynora-mvp/artifacts/hishwevx_WynOra_Logo.jpg";
+// New logo URL - PNG with transparent background
+const LOGO_URL = "https://customer-assets.emergentagent.com/job_152e1fe7-ab24-4409-bf6e-37e5707903c5/artifacts/233b0b4x_Wynora-removebg-preview.png";
 
+// Removed 'Contact' from navigation as per user request
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/how-it-works', label: 'How It Works' },
   { href: '/security', label: 'Security' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 export const Navbar = () => {
@@ -30,22 +31,33 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled 
-        ? 'bg-[#070B14]/90 backdrop-blur-xl border-b border-white/5' 
+        ? 'bg-[#22304F]/95 backdrop-blur-xl border-b border-[#D4AF37]/12 shadow-lg shadow-[#1A2540]/30' 
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group" data-testid="navbar-logo">
-            <motion.img 
-              src={LOGO_URL} 
-              alt="WynOra Vault" 
-              className="h-12 w-auto object-contain"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            />
+        <div className="flex items-center justify-between h-24">
+          {/* Logo - Premium Styling */}
+          <Link to="/" className="flex items-center gap-3 group relative" data-testid="navbar-logo">
+            {/* Subtle gold glow behind logo */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-[#D4AF37]/10 via-[#D4AF37]/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
+            
+            {/* Logo container */}
+            <motion.div
+              className="relative"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              <motion.img 
+                src={LOGO_URL} 
+                alt="WynOra Vault" 
+                className="h-16 w-auto object-contain relative z-10"
+                style={{
+                  filter: 'drop-shadow(0 0 12px rgba(212, 175, 55, 0.3))',
+                }}
+              />
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -55,17 +67,18 @@ export const Navbar = () => {
                 key={link.href}
                 to={link.href}
                 data-testid={`nav-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                className={`relative text-sm font-medium transition-colors duration-200 ${
+                className={`relative text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.href
-                    ? 'text-white'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'text-[#D4AF37]'
+                    : 'text-[#C8D0DC]/70 hover:text-[#D4AF37]'
                 }`}
               >
                 {link.label}
                 {location.pathname === link.href && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-[#B8941F] via-[#D4AF37] to-[#E3B82A] rounded-full"
+                    style={{ boxShadow: '0 0 10px rgba(212, 175, 55, 0.5)' }}
                   />
                 )}
               </Link>
@@ -78,7 +91,12 @@ export const Navbar = () => {
               <Link to={user.role === 'admin' ? '/admin' : '/dashboard'}>
                 <Button
                   data-testid="nav-dashboard-btn"
-                  className="cosmic-btn-primary rounded-full px-6 py-2 font-medium"
+                  className="rounded-full px-6 font-semibold"
+                  style={{
+                    background: 'linear-gradient(135deg, #D4AF37 0%, #E3B82A 30%, #D4AF37 70%, #B8941F 100%)',
+                    color: '#1A2540',
+                    boxShadow: '0 0 25px rgba(212, 175, 55, 0.3)',
+                  }}
                 >
                   Dashboard
                   <ChevronRight className="ml-1 h-4 w-4" />
@@ -90,7 +108,7 @@ export const Navbar = () => {
                   <Button
                     variant="ghost"
                     data-testid="nav-signin-btn"
-                    className="text-slate-300 hover:text-white hover:bg-white/5"
+                    className="text-[#C8D0DC] hover:text-[#D4AF37] hover:bg-[#D4AF37]/5"
                   >
                     Sign In
                   </Button>
@@ -98,7 +116,12 @@ export const Navbar = () => {
                 <Link to="/signup">
                   <Button
                     data-testid="nav-getstarted-btn"
-                    className="cosmic-btn-primary rounded-full px-6 py-2 font-medium"
+                    className="rounded-full px-6 font-semibold"
+                    style={{
+                      background: 'linear-gradient(135deg, #D4AF37 0%, #E3B82A 30%, #D4AF37 70%, #B8941F 100%)',
+                      color: '#1A2540',
+                      boxShadow: '0 0 25px rgba(212, 175, 55, 0.3)',
+                    }}
                   >
                     Get Started
                     <ChevronRight className="ml-1 h-4 w-4" />
@@ -110,7 +133,7 @@ export const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
+            className="lg:hidden p-2 text-[#C8D0DC] hover:text-[#D4AF37] transition-colors rounded-lg hover:bg-[#D4AF37]/8"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             data-testid="mobile-menu-btn"
           >
@@ -126,7 +149,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#070B14]/95 backdrop-blur-xl border-t border-white/5"
+            className="lg:hidden bg-[#22304F]/98 backdrop-blur-xl border-t border-[#D4AF37]/12"
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (
@@ -134,31 +157,43 @@ export const Navbar = () => {
                   key={link.href}
                   to={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-2 text-base font-medium ${
+                  className={`block py-2 text-base font-medium transition-colors ${
                     location.pathname === link.href
-                      ? 'text-white'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'text-[#D4AF37]'
+                      : 'text-[#C8D0DC]/70 hover:text-[#D4AF37]'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-white/10 space-y-3">
+              <div className="pt-4 border-t border-[#D4AF37]/12 space-y-3">
                 {user ? (
                   <Link to={user.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full cosmic-btn-primary rounded-full">
+                    <Button 
+                      className="w-full rounded-full font-semibold"
+                      style={{
+                        background: 'linear-gradient(135deg, #D4AF37 0%, #E3B82A 30%, #D4AF37 70%, #B8941F 100%)',
+                        color: '#1A2540',
+                      }}
+                    >
                       Dashboard
                     </Button>
                   </Link>
                 ) : (
                   <>
                     <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="outline" className="w-full border-white/10 text-white hover:bg-white/5">
+                      <Button variant="outline" className="w-full border-[#D4AF37]/25 text-[#C8D0DC] hover:bg-[#D4AF37]/8 hover:text-[#D4AF37]">
                         Sign In
                       </Button>
                     </Link>
                     <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
-                      <Button className="w-full cosmic-btn-primary rounded-full mt-2">
+                      <Button 
+                        className="w-full rounded-full mt-2 font-semibold"
+                        style={{
+                          background: 'linear-gradient(135deg, #D4AF37 0%, #E3B82A 30%, #D4AF37 70%, #B8941F 100%)',
+                          color: '#1A2540',
+                        }}
+                      >
                         Get Started
                       </Button>
                     </Link>

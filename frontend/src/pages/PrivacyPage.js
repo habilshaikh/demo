@@ -2,35 +2,70 @@ import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 import { PublicLayout } from '../components/layouts/PublicLayout';
 
+// Asset URL
+const GOLD_TEXTURE_URL = "https://customer-assets.emergentagent.com/job_152e1fe7-ab24-4409-bf6e-37e5707903c5/artifacts/pks0eavi_Gold.jpeg";
+
 const PrivacyPage = () => {
   const lastUpdated = "January 2026";
 
   return (
     <PublicLayout>
-      <section className="pt-20 pb-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A2540] via-[#22304F] to-[#22304F]" />
+        
+        {/* Gold texture */}
+        <div 
+          className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
+          style={{
+            backgroundImage: `url(${GOLD_TEXTURE_URL})`,
+            backgroundSize: 'cover',
+          }}
+        />
+        
+        {/* Gold lighting */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse at 20% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%)',
+        }} />
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-6">
-              <Shield className="h-8 w-8 text-accent" />
-            </div>
+            <motion.div 
+              className="w-20 h-20 rounded-2xl bg-gradient-to-br from-gold/20 to-gold/8 flex items-center justify-center mx-auto mb-8 border border-[#C79B4C]/30"
+              animate={{ 
+                y: [0, -5, 0],
+                boxShadow: ['0 0 30px rgba(212, 175, 55, 0.2)', '0 0 50px rgba(212, 175, 55, 0.35)', '0 0 30px rgba(212, 175, 55, 0.2)']
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Shield className="h-10 w-10 text-[#C79B4C]" />
+            </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
-              Privacy Policy
+              Privacy{' '}
+              <span style={{
+                background: 'linear-gradient(135deg, #D4AC62 0%, #C79B4C 50%, #A67E3D 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>Policy</span>
             </h1>
-            <p className="text-slate-400">Last updated: {lastUpdated}</p>
+            <p className="text-[#C8D0DC]/50">Last updated: {lastUpdated}</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="glass rounded-2xl p-8 md:p-12 space-y-8 text-slate-300 leading-relaxed"
+            className="rounded-2xl bg-[#1A2540]/60 backdrop-blur-xl p-8 md:p-12 space-y-8 text-[#C8D0DC]/70 leading-relaxed border border-[#C79B4C]/15"
           >
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">1. Introduction</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                1. Introduction
+              </h2>
               <p>
                 WynOra Vault ("we", "us", or "our") is committed to protecting your privacy. This Privacy 
                 Policy explains how we collect, use, disclose, and safeguard your information when you use 
@@ -40,24 +75,27 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">2. Information We Collect</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                2. Information We Collect
+              </h2>
               <p className="mb-4">We collect the following types of information:</p>
               
-              <h3 className="text-lg font-semibold text-white mt-4 mb-2">2.1 Personal Information</h3>
+              <h3 className="text-lg font-semibold text-[#D4AC62] mt-4 mb-2">2.1 Personal Information</h3>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Full name and email address</li>
                 <li>Account credentials (password stored in encrypted form)</li>
                 <li>Contact information you provide</li>
               </ul>
 
-              <h3 className="text-lg font-semibold text-white mt-4 mb-2">2.2 Documents and Files</h3>
+              <h3 className="text-lg font-semibold text-[#D4AC62] mt-4 mb-2">2.2 Documents and Files</h3>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Documents you upload to your vault</li>
                 <li>Document metadata (file names, sizes, types, upload dates)</li>
                 <li>Organizational categories you create</li>
               </ul>
 
-              <h3 className="text-lg font-semibold text-white mt-4 mb-2">2.3 Usage Information</h3>
+              <h3 className="text-lg font-semibold text-[#D4AC62] mt-4 mb-2">2.3 Usage Information</h3>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Log data (IP address, browser type, access times)</li>
                 <li>Device information</li>
@@ -66,7 +104,10 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">3. How We Use Your Information</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                3. How We Use Your Information
+              </h2>
               <p className="mb-4">We use the collected information to:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Provide and maintain our services</li>
@@ -81,7 +122,10 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">4. Data Storage and Security</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                4. Data Storage and Security
+              </h2>
               <p className="mb-4">
                 Your data is stored securely using industry-standard practices:
               </p>
@@ -95,13 +139,16 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">5. Third-Party Services</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                5. Third-Party Services
+              </h2>
               <p className="mb-4">
                 We use the following third-party services to operate our platform:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li><strong>Cloud Infrastructure:</strong> For secure data storage and processing</li>
-                <li><strong>Analytics Services:</strong> To improve our services (aggregated, non-personal data)</li>
+                <li><strong className="text-white">Cloud Infrastructure:</strong> For secure data storage and processing</li>
+                <li><strong className="text-white">Analytics Services:</strong> To improve our services (aggregated, non-personal data)</li>
               </ul>
               <p className="mt-4">
                 These third-party providers are bound by their own privacy policies and are contractually 
@@ -110,7 +157,10 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">6. Cookies and Tracking</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                6. Cookies and Tracking
+              </h2>
               <p className="mb-4">
                 We use cookies and similar technologies for:
               </p>
@@ -127,16 +177,19 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">7. Your Rights</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                7. Your Rights
+              </h2>
               <p className="mb-4">
                 You have the following rights regarding your personal data:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li><strong>Access:</strong> Request a copy of your personal data</li>
-                <li><strong>Correction:</strong> Request correction of inaccurate data</li>
-                <li><strong>Deletion:</strong> Request deletion of your account and data</li>
-                <li><strong>Portability:</strong> Request your data in a portable format</li>
-                <li><strong>Withdraw Consent:</strong> Withdraw consent for data processing</li>
+                <li><strong className="text-white">Access:</strong> Request a copy of your personal data</li>
+                <li><strong className="text-white">Correction:</strong> Request correction of inaccurate data</li>
+                <li><strong className="text-white">Deletion:</strong> Request deletion of your account and data</li>
+                <li><strong className="text-white">Portability:</strong> Request your data in a portable format</li>
+                <li><strong className="text-white">Withdraw Consent:</strong> Withdraw consent for data processing</li>
               </ul>
               <p className="mt-4">
                 To exercise these rights, please contact us at support@wynora.com.
@@ -144,7 +197,10 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">8. Data Retention</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                8. Data Retention
+              </h2>
               <p>
                 We retain your personal data for as long as your account is active or as needed to provide 
                 services. Upon account deletion request, we will delete your data within 30 days, except 
@@ -153,7 +209,10 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">9. Children's Privacy</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                9. Children's Privacy
+              </h2>
               <p>
                 Our services are not intended for individuals under 18 years of age. We do not knowingly 
                 collect personal information from children. If we become aware that we have collected 
@@ -162,7 +221,10 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">10. Changes to This Policy</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                10. Changes to This Policy
+              </h2>
               <p>
                 We may update this Privacy Policy from time to time. We will notify you of any material 
                 changes by posting the new policy on this page and updating the "Last updated" date. 
@@ -171,16 +233,19 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">11. Grievance Officer</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                11. Grievance Officer
+              </h2>
               <p>
                 In accordance with the Information Technology Act, 2000 and rules made thereunder, 
                 the name and contact details of the Grievance Officer are:
               </p>
-              <div className="mt-4 p-4 bg-white/5 rounded-xl">
-                <p><strong>Grievance Officer:</strong> WynOra Vault Support</p>
-                <p><strong>Email:</strong> support@wynora.com</p>
-                <p><strong>Phone:</strong> +91 XXXXX XXXXX</p>
-                <p><strong>Address:</strong> [Your Address Here]</p>
+              <div className="mt-4 p-4 rounded-xl bg-gradient-to-br from-gold/10 to-transparent border border-[#C79B4C]/18">
+                <p><strong className="text-white">Grievance Officer:</strong> WynOra Vault Support</p>
+                <p><strong className="text-white">Email:</strong> support@wynora.com</p>
+                <p><strong className="text-white">Phone:</strong> +91 XXXXX XXXXX</p>
+                <p><strong className="text-white">Address:</strong> [Your Address Here]</p>
               </div>
               <p className="mt-4">
                 The Grievance Officer will address any grievances within 30 days of receipt.
@@ -188,11 +253,14 @@ const PrivacyPage = () => {
             </section>
 
             <section>
-              <h2 className="font-heading text-2xl font-semibold text-white mb-4">12. Contact Us</h2>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                12. Contact Us
+              </h2>
               <p>
                 If you have any questions about this Privacy Policy, please contact us at:
               </p>
-              <div className="mt-4 p-4 bg-white/5 rounded-xl">
+              <div className="mt-4 p-4 rounded-xl bg-gradient-to-br from-gold/10 to-transparent border border-[#C79B4C]/18">
                 <p>Email: support@wynora.com</p>
                 <p>Phone: +91 XXXXX XXXXX</p>
               </div>

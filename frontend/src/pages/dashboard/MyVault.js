@@ -117,7 +117,10 @@ const MyVault = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-full border-2 border-gold/30 border-t-gold animate-spin" />
+          <p className="text-silver/60 text-sm">Loading your vault...</p>
+        </div>
       </div>
     );
   }
@@ -132,12 +135,13 @@ const MyVault = () => {
       >
         <div>
           <h1 className="font-heading text-3xl font-bold text-white mb-2">My Vault</h1>
-          <p className="text-slate-400">Manage your secure documents</p>
+          <p className="text-silver/60">Manage your secure documents</p>
         </div>
         <Link to="/dashboard/add-record">
           <Button
             data-testid="add-record-btn"
-            className="bg-accent hover:bg-accent/90 text-white rounded-xl"
+            variant="luxury"
+            className="rounded-xl"
           >
             <PlusCircle className="mr-2 h-4 w-4" />
             Add Record
@@ -153,30 +157,26 @@ const MyVault = () => {
         className="flex flex-col sm:flex-row gap-4"
       >
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/50" />
           <Input
             placeholder="Search records..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             data-testid="search-input"
-            className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-slate-500"
+            className="pl-10"
           />
         </div>
         <Select value={categoryFilter} onValueChange={setCategoryFilter}>
           <SelectTrigger 
-            className="w-full sm:w-48 bg-white/5 border-white/10 text-white"
+            className="w-full sm:w-48"
             data-testid="category-filter"
           >
-            <Filter className="mr-2 h-4 w-4" />
+            <Filter className="mr-2 h-4 w-4 text-gold/60" />
             <SelectValue placeholder="Category" />
           </SelectTrigger>
-          <SelectContent className="bg-[#0F253A] border-white/10">
+          <SelectContent>
             {categories.map((cat) => (
-              <SelectItem 
-                key={cat} 
-                value={cat}
-                className="text-white hover:bg-white/10 focus:bg-white/10"
-              >
+              <SelectItem key={cat} value={cat}>
                 {cat}
               </SelectItem>
             ))}
@@ -190,22 +190,22 @@ const MyVault = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="glass rounded-2xl p-12 text-center"
+          className="luxury-card rounded-2xl p-12 text-center"
         >
-          <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6">
-            <FolderLock className="h-10 w-10 text-slate-500" />
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-gold/10 to-gold/5 flex items-center justify-center mx-auto mb-6 border border-gold/20">
+            <FolderLock className="h-10 w-10 text-gold/50" />
           </div>
           <h3 className="font-heading text-xl font-semibold text-white mb-2">
             {searchQuery || categoryFilter !== 'All' ? 'No matching records' : 'Your vault is empty'}
           </h3>
-          <p className="text-slate-400 mb-6">
+          <p className="text-silver/50 mb-6">
             {searchQuery || categoryFilter !== 'All' 
               ? 'Try adjusting your search or filters'
               : 'Start by adding your first record'}
           </p>
           {!searchQuery && categoryFilter === 'All' && (
             <Link to="/dashboard/add-record">
-              <Button className="bg-accent hover:bg-accent/90 text-white rounded-xl">
+              <Button variant="luxury" className="rounded-xl">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add Your First Record
               </Button>
@@ -222,18 +222,18 @@ const MyVault = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="glass rounded-2xl p-6 hover:border-white/20 transition-colors"
+                className="luxury-card rounded-2xl p-6"
                 data-testid={`record-${record.id}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <IconComponent className="h-6 w-6 text-accent" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/15 to-gold/5 flex items-center justify-center flex-shrink-0 border border-gold/20">
+                    <IconComponent className="h-6 w-6 text-gold" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h3 className="font-semibold text-white text-lg">{record.title}</h3>
-                        <span className="inline-block px-2 py-1 rounded-full bg-white/5 text-xs text-slate-400 mt-1">
+                        <span className="inline-block px-2 py-1 rounded-full bg-gold/10 border border-gold/20 text-xs text-gold mt-1">
                           {record.category}
                         </span>
                       </div>
@@ -244,7 +244,7 @@ const MyVault = () => {
                             size="icon"
                             onClick={() => handleDownload(record)}
                             data-testid={`download-${record.id}`}
-                            className="text-slate-400 hover:text-white hover:bg-white/10"
+                            className="text-silver/60 hover:text-gold hover:bg-gold/10"
                           >
                             <Download className="h-4 w-4" />
                           </Button>
@@ -254,7 +254,7 @@ const MyVault = () => {
                             variant="ghost"
                             size="icon"
                             data-testid={`edit-${record.id}`}
-                            className="text-slate-400 hover:text-white hover:bg-white/10"
+                            className="text-silver/60 hover:text-gold hover:bg-gold/10"
                           >
                             <Pencil className="h-4 w-4" />
                           </Button>
@@ -267,16 +267,16 @@ const MyVault = () => {
                             setDeleteDialogOpen(true);
                           }}
                           data-testid={`delete-${record.id}`}
-                          className="text-slate-400 hover:text-red-400 hover:bg-red-500/10"
+                          className="text-silver/60 hover:text-red-400 hover:bg-red-500/10"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
                     {record.description && (
-                      <p className="text-slate-400 mt-2 line-clamp-2">{record.description}</p>
+                      <p className="text-silver/50 mt-2 line-clamp-2">{record.description}</p>
                     )}
-                    <div className="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                    <div className="flex items-center gap-4 mt-3 text-sm text-silver/40">
                       <span>Added {new Date(record.created_at).toLocaleDateString()}</span>
                       {record.file_name && (
                         <span>{formatFileSize(record.file_size)}</span>
@@ -292,15 +292,15 @@ const MyVault = () => {
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent className="bg-[#0F253A] border-white/10">
+        <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-white">Delete Record</AlertDialogTitle>
-            <AlertDialogDescription className="text-slate-400">
+            <AlertDialogTitle>Delete Record</AlertDialogTitle>
+            <AlertDialogDescription>
               Are you sure you want to delete "{recordToDelete?.title}"? This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="border-white/10 text-white hover:bg-white/5">
+            <AlertDialogCancel>
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction

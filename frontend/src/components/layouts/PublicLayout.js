@@ -3,7 +3,7 @@ import { Footer } from './Footer';
 
 export const PublicLayout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-[#070B14] flex flex-col">
+    <div className="min-h-screen flex flex-col luxury-bg marble-texture" style={{ backgroundColor: '#22304F' }}>
       <Navbar />
       <main className="flex-1">
         {children}

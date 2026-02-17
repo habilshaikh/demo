@@ -11,6 +11,31 @@ import { toast } from 'sonner';
 
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_wynora-mvp/artifacts/hishwevx_WynOra_Logo.jpg";
 
+// Gold particle effect
+const GoldParticles = () => {
+  const particles = Array.from({ length: 20 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    duration: Math.random() * 20 + 15,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-gold"
+          style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
+          animate={{ y: [0, -20, 0], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const SignupPage = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -55,22 +80,33 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1C2D] flex">
+    <div className="min-h-screen bg-vault-black flex">
       {/* Left Panel - Visual */}
-      <div className="hidden lg:flex lg:flex-1 bg-gradient-to-br from-[#1E3A8A] to-[#0B1C2D] items-center justify-center p-12">
+      <div className="hidden lg:flex lg:flex-1 relative items-center justify-center p-12 overflow-hidden">
+        <div className="absolute inset-0 luxury-bg" />
+        <div className="absolute inset-0 marble-texture" />
+        <GoldParticles />
+        
+        {/* Glow effect */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gold/10 blur-3xl" />
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="text-center max-w-lg"
+          className="text-center max-w-lg relative z-10"
         >
-          <div className="glass rounded-3xl p-12 card-glow">
-            <div className="w-24 h-24 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-8">
-              <Shield className="h-12 w-12 text-accent" />
-            </div>
+          <div className="luxury-card rounded-3xl p-12 gold-border-glow">
+            <motion.div 
+              className="w-24 h-24 rounded-2xl bg-gradient-to-br from-gold/20 to-gold/5 flex items-center justify-center mx-auto mb-8 border border-gold/30 shadow-gold-glow"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Shield className="h-12 w-12 text-gold" />
+            </motion.div>
             <h2 className="font-heading text-2xl font-bold text-white mb-4">
               Start Securing Your Future
             </h2>
-            <p className="text-slate-300 leading-relaxed">
+            <p className="text-silver/60 leading-relaxed">
               Create your personal vault and start organizing your important 
               documents with enterprise-grade security.
             </p>
@@ -79,11 +115,13 @@ const SignupPage = () => {
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
+      <div className="flex-1 flex items-center justify-center p-6 lg:p-12 relative">
+        <div className="absolute inset-0 luxury-bg-subtle" />
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md"
+          className="w-full max-w-md relative z-10"
         >
           {/* Logo */}
           <Link to="/" className="inline-block mb-8">
@@ -93,15 +131,15 @@ const SignupPage = () => {
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
             Create Account
           </h1>
-          <p className="text-slate-400 mb-8">
+          <p className="text-silver/60 mb-8">
             Start your secure vault journey today
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="fullName" className="text-slate-300">Full Name</Label>
+              <Label htmlFor="fullName">Full Name</Label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                 <Input
                   id="fullName"
                   type="text"
@@ -110,15 +148,15 @@ const SignupPage = () => {
                   required
                   placeholder="John Doe"
                   data-testid="signup-name-input"
-                  className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                  className="pl-12 h-12"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-300">Email Address</Label>
+              <Label htmlFor="email">Email Address</Label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                 <Input
                   id="email"
                   type="email"
@@ -127,15 +165,15 @@ const SignupPage = () => {
                   required
                   placeholder="you@example.com"
                   data-testid="signup-email-input"
-                  className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                  className="pl-12 h-12"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-300">Password</Label>
+              <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -144,12 +182,12 @@ const SignupPage = () => {
                   required
                   placeholder="••••••••"
                   data-testid="signup-password-input"
-                  className="pl-12 pr-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                  className="pl-12 pr-12 h-12"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-silver/50 hover:text-gold transition-colors"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -157,9 +195,9 @@ const SignupPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-slate-300">Confirm Password</Label>
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/50" />
                 <Input
                   id="confirmPassword"
                   type={showPassword ? 'text' : 'password'}
@@ -168,7 +206,7 @@ const SignupPage = () => {
                   required
                   placeholder="••••••••"
                   data-testid="signup-confirm-password-input"
-                  className="pl-12 bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:border-accent h-12"
+                  className="pl-12 h-12"
                 />
               </div>
             </div>
@@ -179,13 +217,13 @@ const SignupPage = () => {
                 checked={agreeTerms}
                 onCheckedChange={setAgreeTerms}
                 data-testid="signup-terms-checkbox"
-                className="mt-1 border-white/20 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
+                className="mt-1 border-gold/30 data-[state=checked]:bg-gold data-[state=checked]:border-gold"
               />
-              <Label htmlFor="terms" className="text-sm text-slate-400 leading-relaxed cursor-pointer">
+              <Label htmlFor="terms" className="text-sm text-silver/50 leading-relaxed cursor-pointer">
                 I agree to the{' '}
-                <Link to="/terms" className="text-accent hover:text-accent/80">Terms & Conditions</Link>
+                <Link to="/terms" className="text-gold hover:text-gold-light">Terms & Conditions</Link>
                 {' '}and{' '}
-                <Link to="/privacy" className="text-accent hover:text-accent/80">Privacy Policy</Link>
+                <Link to="/privacy" className="text-gold hover:text-gold-light">Privacy Policy</Link>
               </Label>
             </div>
 
@@ -193,11 +231,12 @@ const SignupPage = () => {
               type="submit"
               disabled={loading}
               data-testid="signup-submit-btn"
-              className="w-full bg-accent hover:bg-accent/90 text-white rounded-xl h-12 font-medium btn-glow"
+              variant="luxury"
+              className="w-full h-12 rounded-xl"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-vault-black/30 border-t-vault-black rounded-full animate-spin" />
                   Creating account...
                 </span>
               ) : (
@@ -209,11 +248,11 @@ const SignupPage = () => {
             </Button>
           </form>
 
-          <p className="mt-8 text-center text-slate-400">
+          <p className="mt-8 text-center text-silver/50">
             Already have an account?{' '}
             <Link 
               to="/login" 
-              className="text-accent hover:text-accent/80 font-medium"
+              className="text-gold hover:text-gold-light font-medium transition-colors"
               data-testid="login-link"
             >
               Sign in

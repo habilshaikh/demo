@@ -55,7 +55,10 @@ const DashboardOverview = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-full border-2 border-gold/30 border-t-gold animate-spin" />
+          <p className="text-silver/60 text-sm">Loading your vault...</p>
+        </div>
       </div>
     );
   }
@@ -68,9 +71,9 @@ const DashboardOverview = () => {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className="font-heading text-3xl font-bold text-white mb-2">
-          Welcome back, {user?.full_name?.split(' ')[0]}!
+          Welcome back, <span className="gold-text">{user?.full_name?.split(' ')[0]}</span>!
         </h1>
-        <p className="text-slate-400">
+        <p className="text-silver/60">
           Here's an overview of your secure vault
         </p>
       </motion.div>
@@ -81,15 +84,15 @@ const DashboardOverview = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass rounded-2xl p-6"
+          className="stat-card"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-              <FolderLock className="h-6 w-6 text-accent" />
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/20 to-gold/5 flex items-center justify-center border border-gold/20 shadow-gold/20">
+              <FolderLock className="h-6 w-6 text-gold" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats?.total_records || 0}</p>
-              <p className="text-sm text-slate-400">Total Records</p>
+              <p className="text-sm text-silver/50">Total Records</p>
             </div>
           </div>
         </motion.div>
@@ -102,15 +105,15 @@ const DashboardOverview = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * (index + 2) }}
-              className="glass rounded-2xl p-6"
+              className="stat-card"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                  <IconComponent className="h-6 w-6 text-slate-400" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-silver/10 to-silver/5 flex items-center justify-center border border-silver/20">
+                  <IconComponent className="h-6 w-6 text-silver" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-white">{count}</p>
-                  <p className="text-sm text-slate-400">{category}</p>
+                  <p className="text-sm text-silver/50">{category}</p>
                 </div>
               </div>
             </motion.div>
@@ -123,14 +126,18 @@ const DashboardOverview = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="glass rounded-2xl p-6"
+        className="luxury-card rounded-2xl p-6"
       >
-        <h2 className="font-heading text-xl font-semibold text-white mb-4">Quick Actions</h2>
+        <h2 className="font-heading text-xl font-semibold text-white mb-4 flex items-center gap-2">
+          <span className="w-8 h-px bg-gradient-to-r from-gold to-transparent" />
+          Quick Actions
+        </h2>
         <div className="flex flex-wrap gap-4">
           <Link to="/dashboard/add-record">
             <Button
               data-testid="quick-add-record-btn"
-              className="bg-accent hover:bg-accent/90 text-white rounded-xl"
+              variant="luxury"
+              className="rounded-xl"
             >
               <PlusCircle className="mr-2 h-4 w-4" />
               Add New Record
@@ -139,7 +146,7 @@ const DashboardOverview = () => {
           <Link to="/dashboard/vault">
             <Button
               variant="outline"
-              className="border-white/10 text-white hover:bg-white/5 rounded-xl"
+              className="rounded-xl"
             >
               <FolderLock className="mr-2 h-4 w-4" />
               View All Records
@@ -153,11 +160,14 @@ const DashboardOverview = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="glass rounded-2xl p-6"
+        className="luxury-card rounded-2xl p-6"
       >
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-heading text-xl font-semibold text-white">Recent Records</h2>
-          <Link to="/dashboard/vault" className="text-accent hover:text-accent/80 text-sm flex items-center gap-1">
+          <h2 className="font-heading text-xl font-semibold text-white flex items-center gap-2">
+            <span className="w-8 h-px bg-gradient-to-r from-gold to-transparent" />
+            Recent Records
+          </h2>
+          <Link to="/dashboard/vault" className="text-gold hover:text-gold-light text-sm flex items-center gap-1 transition-colors">
             View all
             <ArrowRight className="h-4 w-4" />
           </Link>
@@ -165,12 +175,12 @@ const DashboardOverview = () => {
 
         {recentRecords.length === 0 ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-              <FolderLock className="h-8 w-8 text-slate-500" />
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold/10 to-gold/5 flex items-center justify-center mx-auto mb-4 border border-gold/20">
+              <FolderLock className="h-8 w-8 text-gold/50" />
             </div>
-            <p className="text-slate-400 mb-4">No records yet</p>
+            <p className="text-silver/50 mb-4">No records yet</p>
             <Link to="/dashboard/add-record">
-              <Button className="bg-accent hover:bg-accent/90 text-white rounded-xl">
+              <Button variant="luxury" className="rounded-xl">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add Your First Record
               </Button>
@@ -184,16 +194,16 @@ const DashboardOverview = () => {
                 <Link
                   key={record.id}
                   to={`/dashboard/edit-record/${record.id}`}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-gold/5 hover:border-gold/20 hover:bg-gold/5 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <IconComponent className="h-5 w-5 text-accent" />
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gold/15 to-gold/5 flex items-center justify-center border border-gold/20 group-hover:shadow-gold transition-shadow">
+                    <IconComponent className="h-5 w-5 text-gold" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-white truncate">{record.title}</p>
-                    <p className="text-sm text-slate-400">{record.category}</p>
+                    <p className="font-medium text-white truncate group-hover:text-gold-light transition-colors">{record.title}</p>
+                    <p className="text-sm text-silver/50">{record.category}</p>
                   </div>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-silver/40">
                     {new Date(record.created_at).toLocaleDateString()}
                   </span>
                 </Link>

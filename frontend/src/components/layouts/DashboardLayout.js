@@ -9,8 +9,7 @@ import {
   User, 
   LogOut,
   Menu,
-  X,
-  ChevronRight
+  X
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useAuth } from '../../context/AuthContext';
@@ -39,11 +38,14 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1C2D] flex">
+    <div className="min-h-screen bg-vault-black flex">
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 bg-[#0A1628] border-r border-white/5">
+      <aside className="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 luxury-sidebar">
+        {/* Gold accent line at top */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+        
         {/* Logo */}
-        <div className="flex items-center gap-3 px-6 h-20 border-b border-white/5">
+        <div className="flex items-center gap-3 px-6 h-20 border-b border-gold/10">
           <Link to="/" className="flex items-center gap-3">
             <img src={LOGO_URL} alt="WynOra Vault" className="h-10 w-auto" />
           </Link>
@@ -58,11 +60,7 @@ const DashboardLayout = () => {
                 key={link.href}
                 to={link.href}
                 data-testid={`sidebar-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
-                  isActive
-                    ? 'bg-accent/10 text-accent border border-accent/20'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`}
+                className={`sidebar-link ${isActive ? 'active' : ''}`}
               >
                 <link.icon className="h-5 w-5" />
                 <span className="font-medium">{link.label}</span>
@@ -72,16 +70,16 @@ const DashboardLayout = () => {
         </nav>
 
         {/* User Info & Logout */}
-        <div className="p-4 border-t border-white/5">
-          <div className="glass rounded-xl p-4 mb-4">
-            <p className="text-sm text-slate-400">Welcome back,</p>
-            <p className="font-medium text-white truncate">{user?.full_name}</p>
+        <div className="p-4 border-t border-gold/10">
+          <div className="luxury-card rounded-xl p-4 mb-4">
+            <p className="text-sm text-silver/60">Welcome back,</p>
+            <p className="font-medium text-gold truncate">{user?.full_name}</p>
           </div>
           <Button
             variant="ghost"
             onClick={handleLogout}
             data-testid="sidebar-logout-btn"
-            className="w-full justify-start gap-3 text-slate-400 hover:text-red-400 hover:bg-red-500/10"
+            className="w-full justify-start gap-3 text-silver/60 hover:text-red-400 hover:bg-red-500/10"
           >
             <LogOut className="h-5 w-5" />
             Logout
@@ -90,14 +88,14 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-[#0A1628] border-b border-white/5">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-vault-black/95 backdrop-blur-xl border-b border-gold/10">
         <div className="flex items-center justify-between px-4 h-16">
           <Link to="/" className="flex items-center gap-2">
             <img src={LOGO_URL} alt="WynOra Vault" className="h-8 w-auto" />
           </Link>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 text-slate-400 hover:text-white"
+            className="p-2 text-silver hover:text-gold rounded-lg hover:bg-gold/10 transition-colors"
             data-testid="mobile-sidebar-toggle"
           >
             {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -114,16 +112,16 @@ const DashboardLayout = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden fixed inset-0 z-40 bg-black/50"
+              className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
             />
             <motion.aside
               initial={{ x: -300 }}
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ type: 'spring', damping: 25 }}
-              className="lg:hidden fixed inset-y-0 left-0 z-50 w-72 bg-[#0A1628] border-r border-white/5"
+              className="lg:hidden fixed inset-y-0 left-0 z-50 w-72 luxury-sidebar"
             >
-              <div className="flex items-center gap-3 px-6 h-16 border-b border-white/5">
+              <div className="flex items-center gap-3 px-6 h-16 border-b border-gold/10">
                 <img src={LOGO_URL} alt="WynOra Vault" className="h-8 w-auto" />
               </div>
               <nav className="flex-1 px-4 py-6 space-y-2">
@@ -134,11 +132,7 @@ const DashboardLayout = () => {
                       key={link.href}
                       to={link.href}
                       onClick={() => setSidebarOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
-                        isActive
-                          ? 'bg-accent/10 text-accent border border-accent/20'
-                          : 'text-slate-400 hover:text-white hover:bg-white/5'
-                      }`}
+                      className={`sidebar-link ${isActive ? 'active' : ''}`}
                     >
                       <link.icon className="h-5 w-5" />
                       <span className="font-medium">{link.label}</span>
@@ -146,11 +140,11 @@ const DashboardLayout = () => {
                   );
                 })}
               </nav>
-              <div className="p-4 border-t border-white/5">
+              <div className="p-4 border-t border-gold/10">
                 <Button
                   variant="ghost"
                   onClick={handleLogout}
-                  className="w-full justify-start gap-3 text-slate-400 hover:text-red-400 hover:bg-red-500/10"
+                  className="w-full justify-start gap-3 text-silver/60 hover:text-red-400 hover:bg-red-500/10"
                 >
                   <LogOut className="h-5 w-5" />
                   Logout
@@ -163,7 +157,7 @@ const DashboardLayout = () => {
 
       {/* Main Content */}
       <main className="flex-1 lg:ml-72">
-        <div className="min-h-screen pt-16 lg:pt-0">
+        <div className="min-h-screen pt-16 lg:pt-0 luxury-bg-subtle">
           <div className="p-6 lg:p-8">
             <Outlet />
           </div>
