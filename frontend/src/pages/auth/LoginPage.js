@@ -8,7 +8,7 @@ import { Label } from '../../components/ui/label';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'sonner';
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_wynora-mvp/artifacts/hishwevx_WynOra_Logo.jpg";
+const LOGO_URL = "/LOGO.png";
 
 // Gold particle effect
 const GoldParticles = () => {
@@ -71,9 +71,41 @@ const LoginPage = () => {
           className="w-full max-w-md relative z-10"
         >
           {/* Logo */}
-          <Link to="/" className="inline-block mb-8">
-            <img src={LOGO_URL} alt="WynOra Vault" className="h-14 w-auto" />
-          </Link>
+         // ── LOGO ──
+<Link to="/" className="flex items-center gap-3 group relative mb-8" data-testid="navbar-logo">
+  {/* Gold halo behind logo */}
+  <div
+    className="absolute -inset-3 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+    style={{
+      background:
+        'radial-gradient(ellipse at center, rgba(212,175,55,0.18) 0%, transparent 70%)',
+    }}
+  />
+
+  <motion.div
+    className="relative"
+    whileHover={{ scale: 1.04 }}
+    transition={{ duration: 0.3, ease: "easeOut" }}
+  >
+    {/* Same SignupPage style: White rounded background + shadow */}
+    <div
+      className="absolute inset-0 rounded-2xl bg-white/90 backdrop-blur-md"
+      style={{
+        boxShadow:
+          '0 0 20px rgba(212,175,55,0.3), 0 4px 16px rgba(0,0,0,0.3)',
+      }}
+    />
+
+    <motion.img
+      src={LOGO_URL}
+      alt="WynOra Vault"
+      className="relative z-10 h-14 md:h-16 w-auto object-contain px-3 py-2"
+      style={{
+        filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))',
+      }}
+    />
+  </motion.div>
+</Link>
 
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
             Welcome Back

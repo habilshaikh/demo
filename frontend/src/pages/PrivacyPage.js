@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield } from 'lucide-react';
+import { Shield, Eye, Lock, Smartphone, Users } from 'lucide-react';
 import { PublicLayout } from '../components/layouts/PublicLayout';
 
 // Asset URL
@@ -44,13 +44,13 @@ const PrivacyPage = () => {
               <Shield className="h-10 w-10 text-[#C79B4C]" />
             </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
-              Privacy{' '}
+              Security &{' '}
               <span style={{
                 background: 'linear-gradient(135deg, #D4AC62 0%, #C79B4C 50%, #A67E3D 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>Policy</span>
+              }}>Privacy Policy</span>
             </h1>
             <p className="text-[#C8D0DC]/50">Last updated: {lastUpdated}</p>
           </motion.div>
@@ -61,6 +61,108 @@ const PrivacyPage = () => {
             transition={{ delay: 0.2 }}
             className="rounded-2xl bg-[#1A2540]/60 backdrop-blur-xl p-8 md:p-12 space-y-8 text-[#C8D0DC]/70 leading-relaxed border border-[#C79B4C]/15"
           >
+
+            {/* ── SECURITY SECTION ── */}
+            <section>
+              <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
+                Uncompromising Security. Zero Knowledge. Total Control.
+              </h2>
+              <p className="mb-6">
+                We don't just protect your data; we protect your privacy. WynOraVault uses military-grade 
+                architecture to ensure you—and only you—hold the keys to your legacy. When it comes to your 
+                financial accounts, property deeds, and family's future, "good enough" security isn't enough. 
+                We treat your information as yours alone.{' '}
+                <strong className="text-white">We cannot see it, we cannot share it, and hackers cannot steal it.</strong>
+              </p>
+
+              <h3 className="text-lg font-semibold text-[#D4AC62] mt-6 mb-4">Our Core Security Pillars</h3>
+
+              <div className="space-y-5">
+                {/* Pillar 1 */}
+                <div className="p-5 rounded-xl bg-gradient-to-br from-[#C79B4C]/8 to-transparent border border-[#C79B4C]/15">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#C79B4C]/15 flex items-center justify-center flex-shrink-0">
+                      <Eye className="w-5 h-5 text-[#C79B4C]" />
+                    </div>
+                    <h4 className="text-white font-semibold">🛡️ Zero-Knowledge Architecture</h4>
+                  </div>
+                  <p className="mb-2">
+                    <span className="text-[#D4AC62] font-semibold">What it means: </span>
+                    We operate on a strict "zero-knowledge" basis. Your master password is never stored on our servers.
+                  </p>
+                  <p>
+                    <span className="text-[#D4AC62] font-semibold">Why it matters: </span>
+                    Because we don't have your key, we literally cannot decrypt or read your data. If we can't see it, 
+                    we can't be forced to hand it over, and bad actors can't access it even if they breach our outer walls.
+                  </p>
+                </div>
+
+                {/* Pillar 2 */}
+                <div className="p-5 rounded-xl bg-gradient-to-br from-[#C79B4C]/8 to-transparent border border-[#C79B4C]/15">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#C79B4C]/15 flex items-center justify-center flex-shrink-0">
+                      <Lock className="w-5 h-5 text-[#C79B4C]" />
+                    </div>
+                    <h4 className="text-white font-semibold">🔒 End-to-End Encryption (E2EE)</h4>
+                  </div>
+                  <p className="mb-2">
+                    <span className="text-[#D4AC62] font-semibold">What it means: </span>
+                    Your data is encrypted locally on your device before it is ever sent to our servers. It remains 
+                    an unreadable string of code while in transit and while resting in your vault.
+                  </p>
+                  <p>
+                    <span className="text-[#D4AC62] font-semibold">Why it matters: </span>
+                    It guarantees that your information is completely shielded from interception at every step of the journey.
+                  </p>
+                </div>
+
+                {/* Pillar 3 */}
+                <div className="p-5 rounded-xl bg-gradient-to-br from-[#C79B4C]/8 to-transparent border border-[#C79B4C]/15">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#C79B4C]/15 flex items-center justify-center flex-shrink-0">
+                      <Smartphone className="w-5 h-5 text-[#C79B4C]" />
+                    </div>
+                    <h4 className="text-white font-semibold">📱 Multi-Factor Authentication (MFA) & Biometrics</h4>
+                  </div>
+                  <p className="mb-2">
+                    <span className="text-[#D4AC62] font-semibold">What it means: </span>
+                    Accessing your vault requires more than just a password. We utilize advanced MFA, including 
+                    FaceID, fingerprint scanning, and one-time authenticator codes.
+                  </p>
+                  <p>
+                    <span className="text-[#D4AC62] font-semibold">Why it matters: </span>
+                    Even if someone somehow learned your password, they still could not enter your vault without 
+                    your physical device or biometric signature.
+                  </p>
+                </div>
+
+                {/* Pillar 4 */}
+                <div className="p-5 rounded-xl bg-gradient-to-br from-[#C79B4C]/8 to-transparent border border-[#C79B4C]/15">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#C79B4C]/15 flex items-center justify-center flex-shrink-0">
+                      <Users className="w-5 h-5 text-[#C79B4C]" />
+                    </div>
+                    <h4 className="text-white font-semibold">👥 Rigid Trustee Verification</h4>
+                  </div>
+                  <p className="mb-2">
+                    <span className="text-[#D4AC62] font-semibold">What it means: </span>
+                    Your nominated Trustees don't just get a simple email link. We employ multi-step identity 
+                    verification protocols before granting them the access you've authorized.
+                  </p>
+                  <p>
+                    <span className="text-[#D4AC62] font-semibold">Why it matters: </span>
+                    It prevents impersonation and ensures your most sensitive information is only handed off 
+                    to the exact individuals you designated.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Divider */}
+            <div className="border-t border-[#C79B4C]/15" />
+
+            {/* ── PRIVACY POLICY SECTIONS (unchanged) ── */}
             <section>
               <h2 className="font-heading text-2xl font-semibold text-white mb-4 flex items-center gap-2">
                 <span className="w-6 h-px bg-gradient-to-r from-gold to-transparent" />
@@ -265,6 +367,7 @@ const PrivacyPage = () => {
                 <p>Phone: +91 XXXXX XXXXX</p>
               </div>
             </section>
+
           </motion.div>
         </div>
       </section>

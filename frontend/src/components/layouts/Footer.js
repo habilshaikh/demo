@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Shield, Mail, Phone, MapPin } from 'lucide-react';
 
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_152e1fe7-ab24-4409-bf6e-37e5707903c5/artifacts/233b0b4x_Wynora-removebg-preview.png";
+const LOGO_URL = "/LOGO.png";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,14 +19,36 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <img 
-                src={LOGO_URL} 
-                alt="WynOra Vault" 
-                className="h-14 w-auto"
-                style={{ filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.25))' }}
-              />
-            </Link>
+       <Link to="/" className="flex items-center gap-3 mb-6 group relative">
+  {/* Gold hover halo */}
+  <div
+    className="absolute -inset-3 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+    style={{
+      background:
+        'radial-gradient(ellipse at center, rgba(212,175,55,0.18) 0%, transparent 70%)',
+    }}
+  />
+
+  <div className="relative">
+    {/* White rounded background same as Navbar */}
+    <div
+      className="absolute inset-0 rounded-2xl bg-white/90 backdrop-blur-md"
+      style={{
+        boxShadow:
+          '0 0 20px rgba(212,175,55,0.3), 0 4px 16px rgba(0,0,0,0.3)',
+      }}
+    />
+
+    <img
+      src={LOGO_URL}
+      alt="WynOra Vault"
+      className="relative z-10 h-14 md:h-16 w-auto object-contain px-3 py-2"
+      style={{
+        filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.4))',
+      }}
+    />
+  </div>
+</Link>
             <p className="text-[#C8D0DC]/50 text-sm leading-relaxed mb-6">
               Your secure digital vault for storing personal financial and legal information with industry-standard protection.
             </p>
